@@ -8,6 +8,7 @@ const {
 
 // /api/thoughts
 router.route('/:thoughtId')
+    .post(addThought)
 
 router
     .route('/:thoughtId')
@@ -17,5 +18,5 @@ router
 router
     .route(':/thoughtId/:reactionId')
     .delete(removeReaction)
-    
+
 module.exports = router;
