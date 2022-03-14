@@ -1,14 +1,14 @@
 const router = require('express').Router();
 const {
-    addThought,
+    createThought,
     removeThought,
     addReaction,
     removeReaction
 } = require('../../controllers/thought-controller')
 
 // /api/thoughts
-router.route('/:thoughtId')
-    .post(addThought)
+router.route('/')
+    .post(createThought)
 
 router
     .route('/:thoughtId')

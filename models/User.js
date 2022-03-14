@@ -1,5 +1,5 @@
 const { Schema, model, Types } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+// const dateFormat = require('../utils/dateFormat');
 
 const UserSchema = new Schema(
     {
@@ -9,16 +9,16 @@ const UserSchema = new Schema(
         },
         username: {
             type: String, 
-            required: function() { return this.userId != null; },
+            // required: function() { return this.userId != null; },
             unique: true,
             trim: true
         },
         email: {
             type: String,
-            required: function() { return this.userId != null; },
+            // required: function() { return this.userId != null; },
             unique: true,
             // validate: [validateEmail, 'Please enter a valid e-mail address'],
-            match: ['/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/', 'Please enter a valid e-mail address']
+            // match: ['/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/', 'Please enter a valid e-mail address']
         },
         // thoughts: {
             // array matching { _id } for thoughts model 
@@ -30,7 +30,7 @@ const UserSchema = new Schema(
 );
 
 UserSchema.virtual('friendCount').get(function() {
-    return this.replies.length;
+    return this.friends.length;
 });
 
 const User = model('User', UserSchema);

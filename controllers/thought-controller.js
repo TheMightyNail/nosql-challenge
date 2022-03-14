@@ -1,26 +1,32 @@
-const { Thought } = require('../models');
+const { Thought, User } = require('../models');
 
 const thoughtController = {
-    addThought({ params, body }, res) {
-        console.log(params);
+
+    createThought({ body }, res) {
         Thought.create(body)
-            .then(({ _id }) => {
-                return Thought.findOneAndUpdate(
-                    { _id: params.thoughtId },
-                    { $push: { reactions: _id } },
-                    { new: true }
-                );
-            })
-            .then(dbThoughtData => {
-                console.log(dbThoughtData);
-                if (!dbThoughtData) {
-                    res.status(404).json({ message: 'No thought with that id found' });
-                    return;
-                }
-                res.json(dbThoughtData);
-            })
+            .then(dbUserData => res.json(dbUserData))
             .catch(err => res.json(err));
     },
+    // addThought({ params, body }, res) {
+    //     console.log(params);
+    //     Thought.create(body)
+    //         .then(({ _id }) => {
+    //             return Thought.findOneAndUpdate(
+    //                 { _id: params.thoughtId },
+    //                 { $push: { reactions: _id } },
+    //                 { new: true }
+    //             );
+    //         })
+    //         .then(dbUserData => {
+    //             console.log(dbUserData);
+    //             if (!dbUserData) {
+    //                 res.status(404).json({ message: 'No thought with that id found' });
+    //                 return;
+    //             }
+    //             res.json(dbUserData);
+    //         })
+    //         .catch(err => res.json(err));
+    // },
 
     addReaction({ params, body }, res) {
         Thought.findOneAndUpdate(
@@ -28,12 +34,12 @@ const thoughtController = {
             { $push: { reactions: body } },
             { new: true, runValidators: true }
         )
-        .then(dbThoughtData => {
-            if(!dbThoughtData) {
+        .then(dbUserData => {
+            if(!dbUserData) {
                 res.status(404).json({ message: 'No thought found with that id' });
                 return;
             }
-            res.json(dbThoughtData);
+            res.json(dbUserData);
         })
         .catch(err => res.json(err));
     },
@@ -50,12 +56,12 @@ const thoughtController = {
                     { new: true }
                 );
             })
-            .then(dbThoughtData => {
-                if (!dbThoughtData) {
+            .then(dbUserData => {
+                if (!dbUserData) {
                     res.status(404).json({ message: 'No thought found with that id' });
                     return;
                 }
-                res.json(dbThoughtData);
+                res.json(dbUserData);
             })
             .catch(err => res.json(err));
     },
@@ -66,7 +72,7 @@ const thoughtController = {
             { $pull: { reactions: { reactionId: params.reactionId } } },
             { new: true }
         )
-        .then(dbThoughtData => res.json(dbThoughtData))
+        .then(dbUserData => res.json(dbUserData))
         .catch(err => res.json(err));
     }
 };
