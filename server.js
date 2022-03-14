@@ -9,9 +9,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/nosql-challenge', {
-    useFindAndModify: false,
-    useNewURLParser: true,
-    useUnifiedTopology: true
+    // useFindAndModify: false,
+    // useNewURLParser: true,
+    // useUnifiedTopology: true
 });
 
 mongoose.set('debug', true);

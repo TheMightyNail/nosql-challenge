@@ -17,7 +17,7 @@ const UserSchema = new Schema(
             type: String,
             required: function() { return this.userId != null; },
             unique: true,
-            validate: [validateEmail, 'Please enter a valid e-mail address'],
+            // validate: [validateEmail, 'Please enter a valid e-mail address'],
             match: ['/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/', 'Please enter a valid e-mail address']
         },
         // thoughts: {
